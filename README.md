@@ -87,7 +87,58 @@ martinsaporiti de [DockerHub](https://hub.docker.com/repository/docker/martinsap
 
 ## Swagger para probar la API.
 La API de la aplicación puede ser testeada utilizando la interface web que provee Swagger (el puerto debe ser el mismo 
-que el de la aplicación):
+que el configurado para la aplicación):
 ```
 http://localhost:8080/swagger-ui.html
 ```
+
+### API REST
+En este apartado listan los endpoints implementados indicando el body que espera recibir cada uno de ellos.
+
+### API de Usuarios
+<br>
+
+1. **/api/v1/user/login [POST] - No Segurizado <br>**
+Endpoint para autenticarse. <br>
+Body:
+```json
+{
+  "password": "string",
+  "username": "string"
+}
+```
+
+2. **/api/v1/user/signup [POST] - No Segurizado <br>**
+Endpoint para crear un usuario. <br>
+Body:
+```json
+{
+  "password": "string",
+  "username": "string"
+}
+```
+
+3. **/api/v1/user/signup [GET] - Segurizado (necesita del envío del token en el Header)**
+
+### API de Operaciones
+<br>
+
+1. **/api/v1/operation/ [GET] - Segurizado (necesita del envío del token en el Header) <br>**
+Endpoint que retorna el historial de operaciones.
+Se debe invocar especificando el valor para el parámtro *pageNumber*
+Ejemplo:
+```bash
+/api/v1/operation/?pageNumber=1
+```
+
+2. **/api/v1/operation/plus [POST] - Segurizado (necesita del envío del token en el Header) <br>**
+Enpoint que retorna la suma de los números que recibe en el body:
+```json
+{
+  "num1": Integer,
+  "num2": Integer
+}
+```
+
+
+
