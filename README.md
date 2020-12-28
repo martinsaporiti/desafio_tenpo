@@ -14,6 +14,19 @@ Debes desarrollar una API REST en Spring Boot con las siguientes funcionalidades
 7. Incluir errores http. Mensajes y descripciones para la serie 400.
 
 
+## Swagger para probar la API REST.
+La API de la aplicación puede ser testeada utilizando la interface web que provee Swagger (el puerto debe ser el mismo que el configurado para la aplicación):
+```
+http://localhost:8080/swagger-ui.html
+```
+
+Dado que la API REST tiene seguridad en cada invocación se debe enviar en el header del request el token generado en el login.
+
+> Simpre el token debe estar precedido por **Bearer**!!
+
+En el caso que no se anteponga el prefijo "Bearer" la aplicación no considerará el token.
+
+
 ## Lombok
 Este desafío fue desarrollado utilizando [Lombok](https://projectlombok.org/). Si usted desea importar este código en 
 un IDE deberá tener instalado el plugin correspondiente. En la página oficial de [Lombok](https://projectlombok.org/) 
@@ -83,7 +96,7 @@ $ mvn spring-boot:run
 
 *Nota:* Es menester aclarar que previamente debemos tener ejecutando una base de datos Postgres y haber modificado el archivo *application.properties* de la carpeta *src/main/resources* con la configuración adecuada para poder conectarnos a la base de datos.
 
-PostgreSQL puede ser instalado mediante Docker ejecutando el siguiente comando desde la terminal
+PostgreSQL puede ser instalado y puesto a ejecutar mediante Docker ejecutando el siguiente comando desde la terminal
 
 ```bash
 docker run --name some-postgres -e -p 5432:5432 POSTGRES_PASSWORD=mysecretpassword -d postgres
@@ -125,12 +138,6 @@ $ docker-compose up
 *Nota: El archivo docker.compose.yaml no genera una imagen nueva, sino que utiliza la imagen del repositorio 
 martinsaporiti de [DockerHub](https://hub.docker.com/repository/docker/martinsaporiti/desafio)*  
 
-## Swagger para probar la API.
-La API de la aplicación puede ser testeada utilizando la interface web que provee Swagger (el puerto debe ser el mismo 
-que el configurado para la aplicación):
-```
-http://localhost:8080/swagger-ui.html
-```
 
 ---
 
