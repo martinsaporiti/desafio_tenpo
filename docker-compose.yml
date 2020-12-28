@@ -1,0 +1,32 @@
+version: '2'
+
+services:
+  app:
+    image: 'martinsaporiti/desafio:latest'
+    #build:
+    #  context: .
+    container_name: desafio
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/compose-postgres
+      - SPRING_DATASOURCE_USERNAME=compose-postgres
+      - SPRING_DATASOURCE_PASSWORD=compose-postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - "8080:8080"
+    networks:
+      - desafio-tenpo-net
+
+  db:
+    image: 'postgres:13.1-alpine'
+    networks:
+      - desafio-tenpo-net
+    container_name: db
+    environment:
+      - POSTGRES_USER=compose-postgres
+      - POSTGRES_PASSWORD=compose-postgres
+
+networks:
+  desafio-tenpo-net:
+    driver: bridge
