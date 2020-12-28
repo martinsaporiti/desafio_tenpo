@@ -59,7 +59,7 @@ jwt.secret=desafio-tenpo
 jwt.token.validity=18000
 ```
 
-Además de las propiedades antes mencionadas, en el archivo *application.properties* se encuentran las propiedades que permiten que la aplicación utilice una base de datos (en este caso está configurada para ser usada con postgres):
+Además de las propiedades antes mencionadas, en el archivo *src/main/resources/application.properties* se encuentran las propiedades que permiten que la aplicación utilice una base de datos (en este caso está configurada para ser usada con postgres):
 
 ```bash
 ## PostgreSQL Configuration.
@@ -74,6 +74,16 @@ En un ambiente de testing o producción (por ejemplo) es conveniente configurar 
 entorno siguiendo los lineamientos de las aplicaciones que cumplen con 
 los [12 factores](https://12factor.net/es/). 
 
+
+## Corriendo la aplicación
+Esta aplicación fue construída utilizando Spring Boot y Maven. Entonces para levantar la aplicación simplemente hay que ejecutar el siguiente comando ubicados en el directorio raíz:
+
+```bash
+$ mvn spring-boot:run
+```
+
+*Nota:* Es menester aclarar que previamente debemos tener ejecutando una base de datos Postgres y haber modificado el archivo *application.properties* de la carpeta *src/main/resources* con la configuración adecuada para poder conectarnos a la base de datos.
+
 ## Construyendo la imagen Docker de la aplicación.
 Para construir la imagen docker de la aplicación simplemente hay que ejecutar el siguiente comando:
 ```bash
@@ -84,7 +94,7 @@ $ docker build -t desafio:latest .
 **El archivo Docker contiene la configuración necesaria para compilar la aplicación, empaquetarla y generar la imagen 
 Docker.** Para esto, utiliza una estrategia de *multi-stage builds*.
 
-## Poniendo a correr la aplicación mediante Docker Compose.
+## Correr la aplicación mediante Docker Compose.
 Para ejecutar la aplicación mediante docker compose, utilizando Postgres como base de datos se debe ejecutar el 
 siguiente comando:
 
@@ -149,6 +159,3 @@ Enpoint que retorna la suma de los números que recibe en el body:
   "num2": Integer
 }
 ```
-
-
-
