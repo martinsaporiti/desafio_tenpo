@@ -38,15 +38,14 @@ contiene en su interior la siguiente estructura de paquetes:
 └── web # Este paquete contiene todas las clases de la capa "web", capa que expone la API REST de la aplicación.
     ├── aspect # Paquete con los los aspectos de la capa web.
     ├── controller # Paquete con los Rest Controllers.
-    ├── exception # Este paquete contiene a la clase RestExceptionHandler que maneja las excepciones provenientes de 
-                  # otras capas de la aplicación.
+    ├── exception # Este paquete contiene a la clase RestExceptionHandler que maneja las excepciones provenientes  de otras capas de la aplicación.
     ├── mapper # Este paquete contiene los "mapeadores" de objetos de dominio a DTOs y visceversa. 
     └── model # El modelo que se le restorna a los clientes de la API REST (DTOs).
 ```
 
 ## Configuración
 Se pueden configurar las propiedades de la aplicación modificando los valores por defecto en el archivo 
-application.properties. Estos son algunos de las propiedades que se pueden customizar:
+*src/main/resources/application.properties*. Estos son algunas de las propiedades que se pueden customizar:
 
 ```
 # Cantidad de resultados a retornar cuando se lista el historial de operaciones.
@@ -59,7 +58,7 @@ jwt.secret=desafio-tenpo
 jwt.token.validity=18000
 ```
 
-Además de las propiedades antes mencionadas, en el archivo *src/main/resources/application.properties* se encuentran las propiedades que permiten que la aplicación utilice una base de datos (en este caso está configurada para ser usada con postgres):
+Además de las propiedades antes mencionadas, en el archivo *src/main/resources/application.properties* se encuentran las propiedades que permiten que la aplicación utilice una base de datos (en este caso está configurada para ser usada con PostgreSQL):
 
 ```bash
 ## PostgreSQL Configuration.
@@ -69,13 +68,13 @@ spring.datasource.password=admin123                                  # password 
 ```
 
 
-La modificación de los valores de las propiedades del archivo application.properties es útil para ambientes de desarrollo. 
+La modificación de los valores de las propiedades del archivo *application.properties* es útil para ambientes de desarrollo. 
 En un ambiente de testing o producción (por ejemplo) es conveniente configurar tales valores mediante la definición de variables de 
 entorno siguiendo los lineamientos de las aplicaciones que cumplen con 
 los [12 factores](https://12factor.net/es/). 
 
 
-## Corriendo la aplicación
+## Corriendo la aplicación a partir del código fuente
 Esta aplicación fue construída utilizando Spring Boot y Maven. Entonces para levantar la aplicación simplemente hay que ejecutar el siguiente comando ubicados en el directorio raíz:
 
 ```bash
@@ -83,6 +82,26 @@ $ mvn spring-boot:run
 ```
 
 *Nota:* Es menester aclarar que previamente debemos tener ejecutando una base de datos Postgres y haber modificado el archivo *application.properties* de la carpeta *src/main/resources* con la configuración adecuada para poder conectarnos a la base de datos.
+
+PostgreSQL puede ser instalado mediante Docker ejecutando el siguiente comando desde la terminal
+
+```bash
+docker run --name some-postgres -e -p 5432:5432 POSTGRES_PASSWORD=mysecretpassword -d postgres
+```
+
+Luego se deben modificar las propiedades del archivo *src/main/resources/application.properties*:
+
+```bash
+spring.datasource.url=jdbc:postgresql://localhost:5432/desafio-tenpo 
+spring.datasource.username=postgres                                  
+spring.datasource.password=mysecretpassword  
+```
+y ahora si, parados en el raíz ejecutamos:
+
+```bash
+$ mvn spring-boot:run
+```
+
 
 ## Construyendo la imagen Docker de la aplicación.
 Para construir la imagen docker de la aplicación simplemente hay que ejecutar el siguiente comando:
@@ -99,6 +118,7 @@ Para ejecutar la aplicación mediante docker compose, utilizando Postgres como b
 siguiente comando:
 
 ```bash
+# Ubicados en el directorio raíz.
 $ docker-compose up
 ```
 
@@ -111,6 +131,8 @@ que el configurado para la aplicación):
 ```
 http://localhost:8080/swagger-ui.html
 ```
+
+---
 
 ### API REST
 En este apartado listan los endpoints implementados indicando el body que espera recibir cada uno de ellos.
