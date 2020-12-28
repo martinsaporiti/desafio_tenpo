@@ -54,7 +54,8 @@ public class UserController {
             )
     @ApiResponses(value = {//
             @ApiResponse(code = 400, message = "Algo no funcionó correctamente"), //
-            @ApiResponse(code = 422, message = "Nombre de Usuario ya existe")})
+            @ApiResponse(code = 422, message = "Nombre de Usuario ya existe"),
+            @ApiResponse(code = 201, message = "Usuario creado exitosamente")})
     public ResponseEntity signUp(@Valid @RequestBody CredentialsDto credentials) throws DuplicateUsernameException {
         User savedUser = this.userService.saveNewUser(
                 User.builder()
