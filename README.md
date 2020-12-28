@@ -59,8 +59,18 @@ jwt.secret=desafio-tenpo
 jwt.token.validity=18000
 ```
 
+Además de las propiedades antes mencionadas, en el archivo *application.properties* se encuentran las propiedades que permiten que la aplicación utilice una base de datos (en este caso está configurada para ser usada con postgres):
+
+```bash
+## PostgreSQL Configuration.
+spring.datasource.url=jdbc:postgresql://localhost:5432/desafio-tenpo # url para la conección a la base de datos.
+spring.datasource.username=postgres                                  # nombre de usuario para la conección.
+spring.datasource.password=admin123                                  # password del usuario para establecer la conección.
+```
+
+
 La modificación de los valores de las propiedades del archivo application.properties es útil para ambientes de desarrollo. 
-En un ambiente de testing o producción es conveniente configurar tales valores mediante la definición de variables de 
+En un ambiente de testing o producción (por ejemplo) es conveniente configurar tales valores mediante la definición de variables de 
 entorno siguiendo los lineamientos de las aplicaciones que cumplen con 
 los [12 factores](https://12factor.net/es/). 
 
